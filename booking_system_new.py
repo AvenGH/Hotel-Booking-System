@@ -17,11 +17,8 @@ class BookingSystem:
 
     @staticmethod
     def valid_dates(check_in_date, check_out_date):
-        check_in_date = datetime.datetime.strptime(check_in_date.entry.get(), "%d/%m/%Y").date()
-        check_out_date = datetime.datetime.strptime(check_out_date.entry.get(), "%d/%m/%Y").date()
-        if check_in_date < today or check_out_date < today:
-            tk.messagebox.showerror("Error", "Only future dates can be selected.")
-            return
+        check_in_date = datetime.datetime.strptime(check_in_date, "%Y-%m-%d").date()
+        check_out_date = datetime.datetime.strptime(check_out_date, "%Y-%m-%d").date()
         if check_in_date >= check_out_date:
             tk.messagebox.showerror("Error", "Check-in date must be earlier than check-out date.")
             return
@@ -52,8 +49,8 @@ class BookingSystem:
     # Checks the availability of a room based on check-in and check-out dates
     @classmethod
     def check_availability(cls, check_in_date, check_out_date, room_id, your_booking):
-        check_in_date = datetime.datetime.strptime(check_in_date, "%d/%m/%Y")
-        check_out_date = datetime.datetime.strptime(check_out_date, "%d/%m/%Y")
+        check_in_date = datetime.datetime.strptime(check_in_date, "%Y-%m-%d")
+        check_out_date = datetime.datetime.strptime(check_out_date, "%Y-%m-%d")
 
         if RoomAPI.fetch_room_by_id(room_id)["available"]:
             return True 
@@ -166,8 +163,8 @@ class BookingSystem:
 
     @classmethod
     def submit_booking(cls, user, cmd, booking, selected_room, room_category, adults, children, check_in_date_entry, check_out_date_entry):
-        check_in_date = datetime.datetime.strptime(check_in_date_entry.entry.get(), "%d/%m/%Y")
-        check_out_date = datetime.datetime.strptime(check_out_date_entry.entry.get(), "%d/%m/%Y")
+        check_in_date = datetime.datetime.strptime(check_in_date_entry, "%Y-%m-%d")
+        check_out_date = datetime.datetime.strptime(check_out_date_entry, "%Y-%m-%d")
 
         # Takes in all the necessary arguments and calculates the price
         price = cls.calculate_price(
@@ -200,7 +197,7 @@ class BookingSystem:
                 value = False
             )
 
-            filepath = f"""Confirmation Statements\\booking{ref_no}.txt"""
+            filepath = f"""C:\\Users\\avnik\\Documents\\python\\Projects\\Hotel Reservation NEA Project\\Confirmation Statements\\booking{ref_no}.txt"""
             
             wt.write_booking_confirmation(
                 customer_name = user["name"],
@@ -210,8 +207,8 @@ class BookingSystem:
                 amenities = selected_room["amenities"],
                 adults = adults,
                 children = children,
-                check_in = check_in_date_entry.entry.get(),
-                check_out = check_out_date_entry.entry.get(),
+                check_in = check_in_date,
+                check_out = check_out_date,
                 total_price = price,
                 ref_no=ref_no,
                 file_path = filepath
@@ -232,16 +229,13 @@ class BookingSystem:
                 selected_room["room_type"],
                 adults,
                 children,
-                check_in_date_entry,
-                check_out_date_entry
+                check_in_date,
+                check_out_date
             )
     
 
     @classmethod
-    def modify_booking(cls, user, booking_id, ref_no, selected_room, room_category, adults, children, check_in_date_entry, check_out_date_entry):
-        check_in_date = datetime.datetime.strptime(check_in_date_entry.entry.get(), "%d/%m/%Y")
-        check_out_date = datetime.datetime.strptime(check_out_date_entry.entry.get(), "%d/%m/%Y")
-
+    def modify_booking(cls, user, booking_id, ref_no, selected_room, room_category, adults, children, check_in_date, check_out_date):
         # Takes in all the necessary arguments and calculates the price
         price = cls.calculate_price(
             base_price = selected_room['price'],
@@ -253,12 +247,12 @@ class BookingSystem:
         BookingAPI.modify_booking(
             booking_id = booking_id,
             field="check_in_date",
-            value = check_in_date_entry.entry.get()
+            value = check_in_date
         )
         BookingAPI.modify_booking(
             booking_id = booking_id,
             field="check_out_date",
-            value = check_out_date_entry.entry.get()
+            value = check_out_date
         )
         BookingAPI.modify_booking(
             booking_id = booking_id,
@@ -284,7 +278,7 @@ class BookingSystem:
 
         BookingAPI.modify_booking(booking_id, "status", "Modified")
 
-        filepath = f"""Confirmation Statements\\booking{ref_no}.txt"""
+        filepath = f"""C:\\Users\\avnik\\Documents\\python\\Projects\\Hotel Reservation NEA Project\\Modification Statements\\booking{ref_no}.txt"""
         
         wt.write_booking_modification(
             customer_name = user["name"],
@@ -294,8 +288,8 @@ class BookingSystem:
             amenities = selected_room["amenities"],
             adults = adults,
             children = children,
-            check_in = check_in_date_entry.entry.get(),
-            check_out = check_out_date_entry.entry.get(),
+            check_in = check_in_date,
+            check_out = check_out_date,
             total_price = price,
             ref_no=ref_no,
             file_path = filepath
@@ -314,7 +308,7 @@ class BookingSystem:
         BookingAPI.modify_booking(booking["ID"], "status", "Cancelled")
         RoomAPI.modify_room(booking["room_id"], "available", True)
 
-        filepath = f"""Cancellation Statements\\cancellation{ref_no}.txt"""
+        filepath = f"""C:\\Users\\avnik\\Documents\\python\\Projects\\Hotel Reservation NEA Project\\Cancellation Statements\\cancellation{ref_no}.txt"""
         wt.write_booking_cancellation(user["name"], ref_no, booking["total_price"], filepath)
         cls.send_email(filepath, user["email"], "Booking Cancellation")
 

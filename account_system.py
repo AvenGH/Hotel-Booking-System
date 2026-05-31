@@ -57,7 +57,8 @@ class AccountSystem:
             return
         try:
             auth.send_password_reset_email(email.get())
-            tk.messagebox.showinfo("Reset Password", "A password reset link email has been sent to your inbox!")
+            #tk.messagebox.showinfo("Reset Password", "A password reset link email has been sent to your inbox!")
+            tk.messagebox.askyesno("Question","Are you sure you would like to reset your password?")
         except:
             tk.messagebox.showerror("Error", "Something went wrong. Please try again later...")
 
@@ -115,12 +116,13 @@ class AccountSystem:
     @staticmethod
     def login(email, password):
         try:
-            user = auth.sign_in_with_email_and_password(email.get(), password.get())
+            auth.sign_in_with_email_and_password(email.get(), password.get())
+            user = CustomerAPI.fetch_customer_by_email(email.get())
             return user
-        except:
+        except Exception as e:
             tk.messagebox.showerror("Error", "Invalid email or password.")
+            print(e)
         return
-
 
     # Function that authenticates registration details
     @classmethod
