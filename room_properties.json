@@ -1,0 +1,5 @@
+{
+    "Single": {"budget_range": "500-1000", "amenities": "WiFi, TV, Single Bed", "image": "C:\\Users\\avnik\\Documents\\python\\Projects\\Hotel Reservation NEA Project\\images\\single_room.jpg", "max_capacity": 1},
+    "Double": {"budget_range": "1500-2000", "amenities": "WiFi, Balcony, Queen Bed", "image": "C:\\Users\\avnik\\Documents\\python\\Projects\\Hotel Reservation NEA Project\\images\\double_room.jpg", "max_capacity": 2},
+    "Suite": {"budget_range": "2500-3000", "amenities": "WiFi, Breakfast, King Bed, Ocean View", "image": "C:\\Users\\avnik\\Documents\\python\\Projects\\Hotel Reservation NEA Project\\images\\suite_room.jpg", "max_capacity": 4}
+}
