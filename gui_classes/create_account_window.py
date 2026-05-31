@@ -23,8 +23,8 @@ class CreateAccountWindow:
         ctk.set_default_color_theme("dark-blue")
 
         # Loads icons for show/hide password
-        self.show_password_image = ctk.CTkImage(dark_image = Image.open("C:\\Users\\avnik\\Documents\\python\\Projects\\Hotel Reservation NEA Project\\images\\show_password.jpg"), size=(25, 25))
-        self.hide_password_image = ctk.CTkImage(dark_image = Image.open("C:\\Users\\avnik\\Documents\\python\\Projects\\Hotel Reservation NEA Project\\images\\hide_password.jpg"), size=(25, 25))
+        self.show_password_image = ctk.CTkImage(dark_image = Image.open("images\\show_password.jpg"), size=(25, 25))
+        self.hide_password_image = ctk.CTkImage(dark_image = Image.open("images\\hide_password.jpg"), size=(25, 25))
 
         # Creates a top level (derived) window from the main menu (parent) window
         self.register_window = ctk.CTkToplevel(self.root)

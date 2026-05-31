@@ -27,8 +27,8 @@ class LoginWindow:
         self.login_window.geometry(self.dimensions)
         self.login_window.title("Hotel Booking App")
 
-        self.show_password_image = ctk.CTkImage(dark_image = Image.open("C:\\Users\\avnik\\Documents\\python\\Projects\\Hotel Reservation NEA Project\\images\\show_password.jpg"), size=(25, 25))
-        self.hide_password_image = ctk.CTkImage(dark_image = Image.open("C:\\Users\\avnik\\Documents\\python\\Projects\\Hotel Reservation NEA Project\\images\\hide_password.jpg"), size=(25, 25))
+        self.show_password_image = ctk.CTkImage(dark_image = Image.open("images\\show_password.jpg"), size=(25, 25))
+        self.hide_password_image = ctk.CTkImage(dark_image = Image.open("images\\hide_password.jpg"), size=(25, 25))
 
         # Defines space within which elements may be positioned
         self.frame = ctk.CTkFrame(master=self.login_window)

@@ -17,8 +17,8 @@ class Dashboard:
         self.user = user
         self.data=[]
 
-        self.logout_image = ctk.CTkImage(dark_image = Image.open("C:\\Users\\avnik\\Documents\\python\\Projects\\Hotel Reservation NEA Project\\images\\logout2.jpg"), size=(25, 25))
-        self.bookings_image = ctk.CTkImage(dark_image = Image.open("C:\\Users\\avnik\\Documents\\python\\Projects\\Hotel Reservation NEA Project\\images\\bookings_icon.png"), size=(35, 25))
+        self.logout_image = ctk.CTkImage(dark_image = Image.open("images\\logout2.jpg"), size=(25, 25))
+        self.bookings_image = ctk.CTkImage(dark_image = Image.open("images\\bookings_icon.png"), size=(35, 25))
         self.create_ui()
         self.dashboard.protocol("WM_DELETE_WINDOW", self.on_close)
 

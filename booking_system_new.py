@@ -197,7 +197,7 @@ class BookingSystem:
                 value = False
             )
 
-            filepath = f"""C:\\Users\\avnik\\Documents\\python\\Projects\\Hotel Reservation NEA Project\\Confirmation Statements\\booking{ref_no}.txt"""
+            filepath = f"""Confirmation Statements\\booking{ref_no}.txt"""
             
             wt.write_booking_confirmation(
                 customer_name = user["name"],
@@ -278,7 +278,7 @@ class BookingSystem:
 
         BookingAPI.modify_booking(booking_id, "status", "Modified")
 
-        filepath = f"""C:\\Users\\avnik\\Documents\\python\\Projects\\Hotel Reservation NEA Project\\Modification Statements\\booking{ref_no}.txt"""
+        filepath = f"""Modification Statements\\booking{ref_no}.txt"""
         
         wt.write_booking_modification(
             customer_name = user["name"],
@@ -308,7 +308,7 @@ class BookingSystem:
         BookingAPI.modify_booking(booking["ID"], "status", "Cancelled")
         RoomAPI.modify_room(booking["room_id"], "available", True)
 
-        filepath = f"""C:\\Users\\avnik\\Documents\\python\\Projects\\Hotel Reservation NEA Project\\Cancellation Statements\\cancellation{ref_no}.txt"""
+        filepath = f"""Cancellation Statements\\cancellation{ref_no}.txt"""
         wt.write_booking_cancellation(user["name"], ref_no, booking["total_price"], filepath)
         cls.send_email(filepath, user["email"], "Booking Cancellation")
 

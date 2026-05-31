@@ -29,12 +29,12 @@ class BookingWindow:
         self.room_options = ["Single", "Double", "Suite"]
         self.budget_options = ["$500-1000", "$1500-2000", "$2500-3000"]
 
-        self.room_properties = ad.loadData("txt", "C:\\Users\\avnik\\Documents\\python\\Projects\\Hotel Reservation NEA Project\\obj_files\\room_properties.json")
+        self.room_properties = ad.loadData("txt", "obj_files\\room_properties.json")
 
         self.available_rooms = []
         self.filtered_rooms = []
 
-        self.calendar_image = ctk.CTkImage(dark_image = Image.open("C:\\Users\\avnik\\Documents\\python\\Projects\\Hotel Reservation NEA Project\\images\\calendar_icon.png"), size=(35, 35))
+        self.calendar_image = ctk.CTkImage(dark_image = Image.open("images\\calendar_icon.png"), size=(35, 35))
         self.create_ui()
         self.booking_window.protocol("WM_DELETE_WINDOW", self.on_close)
 
